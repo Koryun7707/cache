@@ -1,26 +1,15 @@
 import {
   Body,
-  ClassSerializerInterceptor,
   Controller,
   Delete,
   Get,
   HttpCode,
   HttpStatus,
   Param,
-  ParseIntPipe,
-  Patch,
   Post,
   Put,
-  UploadedFile,
-  UseGuards,
-  UseInterceptors,
 } from '@nestjs/common';
-import {
-  ApiBearerAuth,
-  ApiExcludeEndpoint,
-  ApiOkResponse,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CacheService } from './cache.service';
 import { CreateCacheDto } from './dto/CreateCacheDto';
 import { CacheDto } from './dto/CacheDto';
@@ -50,7 +39,7 @@ export class CacheController {
   async getAllCache(): Promise<CacheDto[]> {
     return this.cacheService.getAllCache();
   }
-  @Post('/:key')
+  @Get('/:key')
   @HttpCode(HttpStatus.OK)
   @ApiOkResponse({
     type: CacheDto,

@@ -1,10 +1,14 @@
 'use strict';
 
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsOptional } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdateCacheDto {
-    @ApiProperty()
-    @IsNotEmpty({ message: 'value is required' })
-    value: string;
+  @ApiProperty()
+  @IsNotEmpty({ message: 'value is required' })
+  value: string;
+
+  @ApiProperty()
+  @IsOptional()
+  ttl: Date;
 }

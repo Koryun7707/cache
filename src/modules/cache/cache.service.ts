@@ -8,6 +8,7 @@ import { CacheDto } from './dto/CacheDto';
 import { CreateCacheDto } from './dto/CreateCacheDto';
 import * as crypto from 'crypto';
 import { UpdateCacheDto } from './dto/UpdateCacheDto';
+import { UtilsService } from '../../providers/utils.service';
 
 @Injectable()
 export class CacheService {
@@ -29,7 +30,10 @@ export class CacheService {
         value: randomString,
       });
     }
-    return cache;
+    return this.cacheRepository.updateOne(cache.key, {
+      value: cache.value,
+      ttl: UtilsService.ttlDate(),
+    });
   }
   async getAllCache(): Promise<CacheDto[]> {
     return this.cacheRepository.findAll();
