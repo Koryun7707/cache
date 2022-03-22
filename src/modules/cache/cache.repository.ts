@@ -29,6 +29,7 @@ export class CacheRepository {
   async findByParam(key: string): Promise<CacheDto> {
     return this.cacheModel.findOne({
       key,
+      // ttl: { $gt: new Date(Date.now()) },
     });
   }
   async findAll(): Promise<CacheDto[]> {
