@@ -4,6 +4,7 @@ import { ValidationPipe } from '@nestjs/common';
 import * as compression from 'compression';
 import * as morgan from 'morgan';
 import * as bodyParser from 'body-parser';
+import { setupSwagger } from './viveo-swagger';
 
 async function bootstrap() {
   const PORT = process.env.PORT || 5000;
@@ -23,6 +24,7 @@ async function bootstrap() {
   );
   app.use(bodyParser.json({ limit: '50mb' }));
   app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+  setupSwagger(app);
   await app.listen(PORT, () => {
     console.log(`Server has been started on port ${PORT}`);
     console.log(`Using environment: ${process.env.NODE_ENV || 'development'}`);
