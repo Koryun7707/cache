@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { join } from 'path';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { CacheModule } from './modules/cache/cache.module';
 
 @Module({
   imports: [
@@ -10,6 +11,7 @@ import { MongooseModule } from '@nestjs/mongoose';
       isGlobal: true, // no need to import into other modules
     }),
     MongooseModule.forRoot(process.env.MONGODB_URI),
+    CacheModule,
   ],
   controllers: [],
   providers: [],
